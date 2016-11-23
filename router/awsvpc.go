@@ -36,6 +36,10 @@ func (conn *AWSVPCConnection) DisplayName() string {
 	return "awsvpc"
 }
 
+func (conn *AWSVPCConnection) DisplayData() map[string]interface{} {
+	return nil
+}
+
 // OverlayForwarder
 
 func (conn *AWSVPCConnection) Forward(key ForwardPacketKey) FlowOp {

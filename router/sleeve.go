@@ -610,6 +610,10 @@ func (fwd *sleeveForwarder) DisplayName() string {
 	return "sleeve"
 }
 
+func (fwd *sleeveForwarder) DisplayData() map[string]interface{} {
+	return map[string]interface{}{"mtu": fwd.mtu}
+}
+
 func (fwd *sleeveForwarder) Stop() {
 	fwd.sleeve.removeForwarder(fwd.remotePeer.Name, fwd)
 

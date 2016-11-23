@@ -424,18 +424,25 @@ func (fwd *overlaySwitchForwarder) ControlMessage(tag byte, msg []byte) {
 	}
 }
 
-func (fwd *overlaySwitchForwarder) DisplayName() string {
-	var best OverlayForwarder
-
+func (fwd *overlaySwitchForwarder) bestForwarder() (best OverlayForwarder) {
 	fwd.lock.Lock()
 	if fwd.best >= 0 {
 		best = fwd.forwarders[fwd.best].fwd
 	}
 	fwd.lock.Unlock()
+	return
+}
 
-	if best != nil {
+func (fwd *overlaySwitchForwarder) DisplayName() string {
+	if best := fwd.bestForwarder(); best != nil {
 		return best.DisplayName()
 	}
-
 	return "none"
+}
+
+func (fwd *overlaySwitchForwarder) DisplayData() map[string]interface{} {
+	if best := fwd.bestForwarder(); best != nil {
+		return best.DisplayData()
+	}
+	return nil
 }

@@ -775,6 +775,10 @@ func (fwd *fastDatapathForwarder) DisplayName() string {
 	return "fastdp"
 }
 
+func (fwd *fastDatapathForwarder) DisplayData() map[string]interface{} {
+	return map[string]interface{}{"mtu": fwd.fastdp.iface.MTU}
+}
+
 func (fwd *fastDatapathForwarder) handleHeartbeatAck() {
 	log.Debug(fwd.logPrefix(), "handleHeartbeatAck")
 
